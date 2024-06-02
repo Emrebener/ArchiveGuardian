@@ -129,6 +129,7 @@ internal static class SystemFunctions
             case "testverisiolustur":
                 TestFunctions.TestVerisiOlustur(
                     dosyaSayisi: args.ContainsKey("dosyaSayisi") ? Convert.ToInt32(args["dosyaSayisi"]) : null,
+                    kelimeSayisi: args.ContainsKey("kelimeSayisi") ? Convert.ToInt32(args["kelimeSayisi"]) : null,
                     yol: args.ContainsKey("yol") ? args["yol"] : null
                     );
                 break;
@@ -166,7 +167,7 @@ internal static class SystemFunctions
 
         Console.WriteLine("\n");
         PrintBlue("TEST KOMUTLARI:");
-        Console.WriteLine("`TestVerisiOlustur -dosyaSayisi -yol` -> Test amaclari icin arsive bir miktar ornek ici dolu metin belgesi kaydeder.");
+        Console.WriteLine("`TestVerisiOlustur -dosyaSayisi -kelimeSayisi -yol` -> Test amaclari icin arsive bir miktar ornek ici dolu metin belgesi kaydeder.");
         Console.WriteLine("`DosyayaMudahaleEt -dosyaAdi` -> Belirtilen dosyanin iceriginde degisiklik yaparak veri butunlugunu bozar.\n");
     }
 

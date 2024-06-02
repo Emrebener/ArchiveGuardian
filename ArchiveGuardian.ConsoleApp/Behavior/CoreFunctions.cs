@@ -70,12 +70,14 @@ internal static class CoreFunctions
 
             if (satirSayisi.HasValue && sayfaNo.HasValue)
             {
+                var totalCount = db.Files.Count();
+
                 // Paginated mode
                 int pageSize = satirSayisi.Value;
                 int pageNumber = sayfaNo.Value;
                 var paginatedFiles = query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
-                SystemFunctions.PrintBlue($"Sayfa: {pageNumber}, Satir sayisi: {pageSize}.");
+                SystemFunctions.PrintBlue($"Sayfa: {pageNumber}, Satir sayisi: {pageSize}, Toplam: {totalCount}");
                 foreach (var file in paginatedFiles)
                 {
                     Console.WriteLine($"ID: {file.ID}, DosyaAdi: {file.Name}, Yol: {file.Path}, OwnHash: {file.OwnHash}, TotalHash: {file.TotalHash}");

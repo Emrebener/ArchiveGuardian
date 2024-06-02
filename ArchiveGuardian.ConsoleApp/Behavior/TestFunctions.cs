@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Primitives;
 
 namespace ArchiveGuardian.ConsoleApp.Behavior;
 
@@ -16,28 +17,30 @@ internal static class TestFunctions
     /// </summary>
     /// <param name="numOfFiles">Number of files to generate</param>
     /// <param name="path">File or folder path</param>
-    internal static async void TestVerisiOlustur(int? dosyaSayisi, string? yol)
+
+    internal static async void TestVerisiOlustur(int? dosyaSayisi, int? kelimeSayisi, string? yol)
     {
-        if (!dosyaSayisi.HasValue || string.IsNullOrEmpty(yol))
+        if (!dosyaSayisi.HasValue || !kelimeSayisi.HasValue || string.IsNullOrEmpty(yol))
         {
-            Console.WriteLine("RastgeleDosyalarOlusturVeArsiveEkle komutu icin dosya sayisi ve yol belirtilmesi gerekmektedir.");
+            Console.WriteLine("Belge sayisi, kelime sayisi ve yol belirtilmesi gereklidir.");
             return;
         }
 
-        _ = Directory.CreateDirectory(yol);
+        _ = Directory.CreateDirectory(yol); // belirtilen klasör yoksa oluştur
 
         for (int i = 0; i < dosyaSayisi.Value; i++)
         {
             string fileName = $"OrnekDosya_{Guid.NewGuid().ToString().Substring(28)}.txt";
             string filePath = Path.Combine(yol, fileName);
 
-            string fileContent = OrnekYaziOlustur(100); // Generate 100-word dummy text
+            string fileContent = OrnekYaziOlustur(kelimeSayisi.HasValue ? kelimeSayisi!.Value : 100);
+
+            //File.WriteAllText(filePath, fileContent);
             using (StreamWriter sw = new StreamWriter(filePath, false, System.Text.Encoding.UTF8))
             {
                 sw.Write(fileContent);
                 sw.Flush();
             }
-            //File.WriteAllText(filePath, fileContent);
 
             string fileHash = CryptoHelper.CalculateFileHash(filePath);
 
@@ -50,8 +53,6 @@ internal static class TestFunctions
 
             if (await DataAccessLayer.AddFile(file))
                 Console.WriteLine($"Dosya {i+1} olusturuldu ve arsive eklendi.");
-
-            // Thread.Sleep(TimeSpan.FromSeconds(0.1));
         }
     }
 

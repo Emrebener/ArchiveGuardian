@@ -46,10 +46,8 @@ internal static class DataAccessLayer
         {
             using var scope = Program.host.Services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            //using var transaction = db.Database.BeginTransaction();
 
             int affectedRows = 0;
-
 
             file.TotalHash = CryptoHelper.CombineHashes(
                 hash1: file.OwnHash,
@@ -63,13 +61,13 @@ internal static class DataAccessLayer
                 return true;
             else
             {
-                Console.WriteLine("Tried to add a file, but affected rows were 0.");
+                Console.WriteLine("Dosya ekleme başarısız oldu.");
                 return false;
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An unexpected error occurred in AddFile: " + ex.Message);
+            Console.WriteLine("Beklenmeyen bir hata oluştu: " + ex.Message);
             return false;
         }
     }

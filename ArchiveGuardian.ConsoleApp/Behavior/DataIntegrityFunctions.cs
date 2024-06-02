@@ -14,9 +14,10 @@ internal static class DataIntegrityFunctions
     /// <summary>
     /// Looks up a file in the archive, and checks its hash validity.
     /// Doesn't perform a global archive check, only checks the file itself.
-    /// Parameterize the input.
+    /// Parameterize the input.S
     /// </summary>
     /// <param name="fileName">Name of the file</param>
+
     internal static void DosyayiDogrula(string? dosyaAdi, int? id)
     {
         using (var scope = Program.host.Services.CreateScope())
@@ -61,7 +62,6 @@ internal static class DataIntegrityFunctions
 
             #endregion
         }
-
     }
 
     /// <summary>
