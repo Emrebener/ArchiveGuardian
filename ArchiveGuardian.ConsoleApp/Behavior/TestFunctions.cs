@@ -30,7 +30,7 @@ internal static class TestFunctions
 
         for (int i = 0; i < dosyaSayisi.Value; i++)
         {
-            string fileName = $"OrnekDosya_{Guid.NewGuid().ToString().Substring(28)}.txt";
+            string fileName = $"OrnekDosya_{Guid.NewGuid()}.txt";
             string filePath = Path.Combine(yol, fileName);
 
             string fileContent = OrnekYaziOlustur(kelimeSayisi.HasValue ? kelimeSayisi!.Value : 100);

@@ -3,6 +3,7 @@ using ArchiveGuardian.ConsoleApp.Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,6 +83,7 @@ internal static class DataIntegrityFunctions
             }
 
             Console.WriteLine($"{files.Count} dosyanin veri butunlugu kontrol ediliyor...");
+            var stopwatch = Stopwatch.StartNew();
 
             string previousTotalHash = string.Empty;
             foreach (var file in files)
@@ -94,13 +96,15 @@ internal static class DataIntegrityFunctions
                 if (recalculatedOwnHash != file.OwnHash || recalculatedTotalHash != file.TotalHash)
                 {
                     SystemFunctions.PrintRed($"Veri butunlugu bozuk dosya tespit edildi; {file.Name}");
+                    stopwatch.Stop();
                     return;
                 }
 
                 previousTotalHash = recalculatedTotalHash; // update "previous total hash" to be used in next iteration
             }
 
-            SystemFunctions.PrintGreen("Arsivdeki butun dosyalarin veri butunlugunu korundugu dogrulanmistir.");
+            stopwatch.Stop(); // Stop the stopwatch
+            SystemFunctions.PrintGreen($"Arsivdeki butun dosyalarin veri butunlugunu korundugu dogrulanmistir. Islem toplam {stopwatch.Elapsed.TotalSeconds} saniye surmustur.");
         }
 
     }

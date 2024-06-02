@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArchiveGuardian.ConsoleApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+388df6aa395bbace0a34c770bb3f347751b0383f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d674d61c648351edb969f4fe4a05f9486dfcf3b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArchiveGuardian.ConsoleApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArchiveGuardian.ConsoleApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
