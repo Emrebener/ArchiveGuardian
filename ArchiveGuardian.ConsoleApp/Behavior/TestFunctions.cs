@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
+using System.Diagnostics;
 
 namespace ArchiveGuardian.ConsoleApp.Behavior;
 
@@ -27,6 +28,9 @@ internal static class TestFunctions
         }
 
         _ = Directory.CreateDirectory(yol); // belirtilen klasör yoksa oluştur
+
+        Console.WriteLine($"{dosyaSayisi.Value} dosya oluşturuluyor...");
+        var stopwatch = Stopwatch.StartNew();
 
         for (int i = 0; i < dosyaSayisi.Value; i++)
         {
@@ -54,6 +58,9 @@ internal static class TestFunctions
             if (await DataAccessLayer.AddFile(file))
                 Console.WriteLine($"Dosya {i+1} olusturuldu ve arsive eklendi.");
         }
+
+        stopwatch.Stop();
+        SystemFunctions.PrintGreen($"{dosyaSayisi.Value} dosya arsive eklenmistir. Islem toplam {stopwatch.Elapsed.TotalSeconds} saniye surmustur.");
     }
 
     /// <summary>

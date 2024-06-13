@@ -103,7 +103,7 @@ internal static class DataIntegrityFunctions
                 previousTotalHash = recalculatedTotalHash; // update "previous total hash" to be used in next iteration
             }
 
-            stopwatch.Stop(); // Stop the stopwatch
+            stopwatch.Stop();
             SystemFunctions.PrintGreen($"Arsivdeki butun dosyalarin veri butunlugunu korundugu dogrulanmistir. Islem toplam {stopwatch.Elapsed.TotalSeconds} saniye surmustur.");
         }
 
